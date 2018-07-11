@@ -18,14 +18,26 @@ export class AppComponent implements OnInit {
   formularioDeUsuario: FormGroup;
 
   // Via DI, nós obtemos o FormBuilder.
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.criarFormularioDeUsuario();
   }
 
   enviarDados() {
-    console.log(this.formularioDeUsuario);
+    const dadosFormulario = this.formularioDeUsuario.value;
+
+    const usuario = new Usuario(
+      dadosFormulario.nome,
+      dadosFormulario.email,
+      dadosFormulario.cpf,
+      dadosFormulario.nascimento,
+      dadosFormulario.senha
+    );
+
+    alert(`O usuário ${usuario.nome} foi cadastrado com sucesso. \n Dados: ${JSON.stringify(usuario)}`);
+
+    this.formularioDeUsuario.reset();
   }
 
   criarFormularioDeUsuario() {
