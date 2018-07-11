@@ -1,0 +1,93 @@
+<form [formGroup]="formularioDeUsuario" (ngSubmit)="enviarDados()">
+  <div>
+    <label for="nome">Nome: </label>
+    <input type="text" formControlName="nome">
+    <div *ngIf="!nome.pristine && nome.errors">
+      <p *ngIf="nome.errors.required">
+        Nome é obrigatório.
+      </p>
+      <p *ngIf="nome.errors.minlength">
+        Nome deve ter no mínimo 3 caracters.
+      </p>
+      <p *ngIf="nome.errors.maxlength">
+        Nome deve ter no máximo 100 caracters.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <label for="email">E-mail: </label>
+    <input type="text" formControlName="email">
+    <div *ngIf="!email.pristine && email.errors">
+      <p *ngIf="email.errors.email">
+        Digite um e-mail válido.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <label for="cpf">CPF: </label>
+    <input type="text" formControlName="cpf">
+    <div *ngIf="!cpf.pristine && cpf.errors">
+      <p *ngIf="cpf.errors.required">
+        CPF é obrigatório.
+      </p>
+      <p *ngIf="cpf.errors.cpfInvalido">
+        Digite um CPF válido
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <label for="nascimento">Nascimento: </label>
+    <input type="date" formControlName="nascimento">
+    <div *ngIf="!nascimento.pristine && nascimento.errors">
+      <p *ngIf="nascimento.errors.required">
+        Data de Nascimento é obrigatória.
+      </p>
+      <p *ngIf="nascimento.errors.menorDeIdade">
+        Você precisa ter mais de 18 anos para cadastrar-se.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <label for="senha">Senha: </label>
+    <input type="password" formControlName="senha">
+    <div *ngIf="!senha.pristine && senha.errors">
+      <p *ngIf="senha.errors.required">
+        Senha é obrigatória.
+      </p>
+      <p *ngIf="senha.errors.minlength">
+        Senha deve ter no mínimo 6 caracters.
+      </p>
+      <p *ngIf="senha.errors.maxlength">
+        Senha deve ter no máximo 12 caracters.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <label for="confirmarSenha">Confirmar Senha: </label>
+    <input type="password" formControlName="confirmarSenha">
+    <div *ngIf="!confirmarSenha.pristine && confirmarSenha.errors">
+      <p *ngIf="confirmarSenha.errors.required">
+        Confirme sua senha.
+      </p>
+      <p *ngIf="confirmarSenha.errors.senhasNaoCoincidem">
+        As senhas não coincidem.
+      </p>
+    </div>
+  </div>
+
+  <br>
+  <div>
+    <button [disabled]="!formularioDeUsuario.valid">Enviar dados</button>
+  </div>
+
+  <br>
+  <br>
+
+  <div>{{ formularioDeUsuario.value | json}}</div>
+  <div>{{ formularioDeUsuario.valid | json }}</div>
+</form>
